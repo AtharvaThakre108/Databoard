@@ -1,0 +1,20 @@
+.auth-page {
+  min-height: calc(100vh - 72px);
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 420px;
+}
+
+.auth-card h1 {
+  margin-top: 0;
+}
+
+.auth-card p {
+  color: var(--muted);
+  text-align: center;
+}
