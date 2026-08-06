@@ -14,12 +14,18 @@ export default function Login() {
     e.preventDefault();
     try {
       const res = await loginUser({ email, password });
-      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("access_token", res.data.access_token);
+      localStorage.setItem("refresh_token", res.data.refresh_token);
       setUser(res.data.user);
       toast.success("Logged in successfully");
       navigate("/");
-    } catch {
-      toast.error("Login failed");
+    } catch (err) {
+      const detail = err.response?.data?.detail;
+      const message = Array.isArray(detail)
+        ? detail.map((e) => e.msg).join(", ")
+        : detail || err.message || "Login failed";
+
+      toast.error(message);
     }
   };
 
