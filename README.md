@@ -83,11 +83,8 @@ password hashing.
 - **PostgreSQL** — required by the spec; also gives native JSON support
   for the dataset storage approach below.
 - **pyjwt + passlib[bcrypt]** — rolled by hand instead of a library
-  like `fastapi-users`, specifically because the spec asks you to
-  *document your JWT refresh strategy* — that's much easier to explain
-  (and to verify by reading the code) when you wrote the token
-  issuance and verification yourself rather than pointing at a
-  black-box library.
+  like `fastapi-users`, specifically because the spec asks to
+  *document your JWT refresh strategy*
 
 ## Project layout
 
@@ -133,7 +130,7 @@ pytest tests/ -q
 ```
 
 Tests run against the **`databoard_test`** database, not dev
-database each test gets a clean schema via `create_all`/`drop_all`
+database, each test gets a clean schema via `create_all`/`drop_all`
 fixtures.
 
 Coverage, by file:
@@ -229,8 +226,7 @@ automatic access-token refresh.
 
 > `recharts` is listed in `package.json` but not currently used
 > anywhere — `echarts-for-react` is the charting library actually
-> wired up. Safe to remove from dependencies, or leave as-is if
-> there's no time pressure to clean up.
+> wired up.
 
 ## Project layout
 
