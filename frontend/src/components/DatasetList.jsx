@@ -35,22 +35,24 @@ export default function DatasetList({
             {dataset.name}
           </span>
 
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              onDelete(dataset.id);
-            }}
-            style={{
-              background: "#dc2626",
-              color: "#fff",
-              border: "none",
-              padding: "6px 12px",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
-          >
-            Delete
-          </button>
+          {onDelete && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onDelete(dataset.id);
+              }}
+              style={{
+                background: "#dc2626",
+                color: "#fff",
+                border: "none",
+                padding: "6px 12px",
+                borderRadius: "5px",
+                cursor: "pointer",
+              }}
+            >
+              Delete
+            </button>
+          )}
         </div>
       ))}
     </div>
