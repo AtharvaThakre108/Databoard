@@ -13,9 +13,19 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="navbar">
-      <Link className="brand" to="/">DataApp</Link>
-      <div className="nav-right">
+    <nav className="navbar" style={{ display: "flex", alignItems: "center", padding: "0.75rem 1.5rem" }}>
+      <Link className="brand" to="/" style={{ fontWeight: 700, marginRight: "2rem" }}>
+        DataBoard
+      </Link>
+
+      {user && (
+        <div className="nav-links" style={{ display: "flex", gap: "1.5rem", flex: 1 }}>
+          <Link to="/analytics">Data</Link>
+          <Link to="/plot">Plot</Link>
+        </div>
+      )}
+
+      <div className="nav-right" style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
         {user && <span className="nav-user">{user.name || user.email}</span>}
         {user && <button className="secondary-btn" onClick={handleLogout}>Logout</button>}
       </div>

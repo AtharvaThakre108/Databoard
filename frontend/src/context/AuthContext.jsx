@@ -8,20 +8,25 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   const logout = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
     setUser(null);
   };
 
   const refresh = async () => {
-    const res = await refreshToken();
-    localStorage.setItem("token", res.data.token);
-    return res.data.token;
+    const storedRefreshToken = localStorage.getItem("refresh_token");
+    if (!storedRefreshToken) {
+      throw new Error("No refresh token available");
+    }
+    const res = await refreshToken(storedRefreshToken);
+    localStorage.setItem("access_token", res.data.access_token);
+    return res.data.access_token;
   };
 
   useEffect(() => {
     const init = async () => {
       try {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("access_token");
         if (!token) return;
 
         const me = await getMe();

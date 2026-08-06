@@ -1,38 +1,24 @@
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import { getDatasets } from "../api/dataset";
-import UploadForm from "../components/UploadForm";
-import DatasetList from "../components/DatasetList";
+import { Link } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 export default function Dashboard() {
-  const [datasets, setDatasets] = useState([]);
-
-  const load = async () => {
-    try {
-      const res = await getDatasets();
-      setDatasets(res.data);
-    } catch {
-      toast.error("Failed to load datasets");
-    }
-  };
-
-  useEffect(() => {
-    load();
-  }, []);
+  const { user } = useAuth();
 
   return (
     <div className="dashboard-page">
-      <div className="dashboard-grid">
-        <section className="panel">
-          <h2>Upload dataset</h2>
-          <UploadForm onUploaded={load} />
-        </section>
+      <section className="panel">
+        <h2>Welcome{user ? `, ${user.name || user.email}` : ""}</h2>
+        <p>Upload datasets, browse what you've got, or jump straight into analysis.</p>
 
-        <section className="panel">
-          <h2>Your datasets</h2>
-          <DatasetList datasets={datasets} />
-        </section>
-      </div>
+        <div style={{ display: "flex", gap: "1rem", marginTop: "1.5rem" }}>
+          <Link to="/analytics">
+            <button>Upload / Manage Data</button>
+          </Link>
+          <Link to="/plot">
+            <button>Compute & Plot</button>
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }
