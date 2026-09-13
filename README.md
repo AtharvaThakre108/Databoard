@@ -36,10 +36,7 @@ npm start
 
 App: `http://localhost:3000`
 
-Register an account, then upload the sample CSV from the repo root to
-try the app end to end.
-
-## Architecture decisions worth knowing (for review/interview)
+## Architecture decisions worth knowing
 
 - **Dataset storage is JSON, not a dynamic table per upload.** Turning
   arbitrary CSV headers into SQL column identifiers is messy (illegal
@@ -73,7 +70,7 @@ FastAPI + PostgreSQL API for CSV upload, dataset browsing, quick stats,
 and plot data. Auth is hand-rolled JWT (access + refresh) with bcrypt
 password hashing.
 
-## Stack & why
+## Stack
 
 - **FastAPI** — async-capable, automatic request validation via
   Pydantic, built-in OpenAPI docs at `/docs`.
